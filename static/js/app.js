@@ -50,18 +50,22 @@ d3.json("../../data/samples.json").then(function(samples){
     var dataBar = [{
         x: sampleValue,
         y: otuTop,
-        mode: 'markers',
+        title: {text: "Top 10 OTUs", font: {size: 20}},
+        mode: "markers",
         text: otuLabel,
-        type: 'bar',
-        orientation: 'h'
+        type: "bar",
+        orientation: "h",
+        marker: {color: "#2ec4b6"}, 
     }];
 
     var layoutBar = {
-        xaxis: {title: 'Sample Values'},
-        yaxis: {title: 'OTU ID', autorange: 'reversed'}
+        title: {text: "Top 10 OTUs", font: {size: 20}}, 
+        xaxis: {title: "Sample Values"},
+        yaxis: {title: "OTU ID", autorange: "reversed"},
+        
     };
 
-    Plotly.newPlot('bar', dataBar, layoutBar);
+    Plotly.newPlot("bar", dataBar, layoutBar);
 
 
     // BUBBLE CHART
@@ -78,23 +82,24 @@ d3.json("../../data/samples.json").then(function(samples){
     var dataBub = [{
         x: otuID,
         y: sampleValue,
-        mode: 'markers',
+        mode: "markers",
         marker: {
             size: sampleValue,
             color: otuID,
-            colorscale: [[0, 'rgb(211, 55, 170)'], [1, 'rgba(21, 152, 212, 1)']]
+            colorscale: [[0, "#2ec4b6"], [1, "#ff0a54"]]
         },
         text: otuLabel
     }];
       
     var layoutBub = {
+        title: {text: "All OTUs", font: {size: 20}},
         showlegend: false,
         height: 600,
         width: 1200,
-        xaxis:{title:'OTU ID'}
+        xaxis:{title:"OTU ID"}
     };
 
-    Plotly.newPlot('bubble', dataBub, layoutBub);
+    Plotly.newPlot("bubble", dataBub, layoutBub);
     
 
     // META DATA //
@@ -102,7 +107,7 @@ d3.json("../../data/samples.json").then(function(samples){
     var metaSelect = data[0].metadata.filter(item => item.id === 940);
 
     // Div id for demographic info box
-    var metaBox = d3.select('#sample-metadata');
+    var metaBox = d3.select("#sample-metadata");
 
     // // Append paragraph tags for the demographic box
     // metaBox.append('p').text(`id: ${starterMeta[0].id}`);
@@ -153,11 +158,10 @@ d3.json("../../data/samples.json").then(function(samples){
 
     var layoutGauge = {
         width: 600, 
-        height: 450, 
-        margin: { t: 0, b: 0 } 
+        height: 450
     };
 
-    Plotly.newPlot('gauge', dataGauge, layoutGauge);
+    Plotly.newPlot("gauge", dataGauge, layoutGauge);
 
 
     // DROPDOWN MENU CHANGE // 
@@ -181,21 +185,24 @@ d3.json("../../data/samples.json").then(function(samples){
         var dataBar = [{
             x: sampleValue,
             y: otuTop,
-            mode: 'markers',
+            title: {text: "Top 10 OTUs", font: {size: 20}},
+            mode: "markers",
             text: otuLabel,
-            type: 'bar',
-            orientation: 'h'
+            type: "bar",
+            orientation: "h",
+            marker: {color: "#2ec4b6"}
         }];
     
-        var layoutBar = {
-            xaxis: {title: 'Sample Values'},
-            yaxis: {title: 'OTU ID', autorange: 'reversed'}
+        var layoutBar = { 
+            title: {text: "Top 10 OTUs", font: {size: 20}},
+            xaxis: {title: "Sample Values"},
+            yaxis: {title: "OTU ID", autorange: "reversed"}
         };
 
         // Make chart responsive
         var configBar = {responsive:true};
     
-        Plotly.newPlot('bar', dataBar, layoutBar, configBar);
+        Plotly.newPlot("bar", dataBar, layoutBar, configBar);
 
 
         // Bubble Chart
@@ -206,35 +213,36 @@ d3.json("../../data/samples.json").then(function(samples){
         var dataBub = [{
             x: otuID,
             y: sampleValue,
-            mode: 'markers',
+            mode: "markers",
             marker: {
                 size: sampleValue,
                 color: otuID,
-                colorscale: [[0, 'rgb(211, 55, 170)'], [1, 'rgba(21, 152, 212, 1)']]
+                colorscale: [[0, "#2ec4b6"], [1, "#ff0a54"]]
             },
             text: otuLabel
         }];
       
         var layoutBub = {
+            title: {text: "All OTUs", font: {size: 20}},
             showlegend: false,
             height: 600,
             width: 1200,
-            xaxis:{title:'OTU ID'}
+            xaxis:{title:"OTU ID"}
         };
 
-        Plotly.newPlot('bubble', dataBub, layoutBub);
+        Plotly.newPlot("bubble", dataBub, layoutBub);
 
 
         // Meta Data (Demographic Info Box)
         
         var metaSelect = data[0].metadata.filter(item => item.id === parseInt(selectID));
         console.log(metaSelect);
-        var metaBox = d3.select('#sample-metadata');
+        var metaBox = d3.select("#sample-metadata");
         // Clear text
         metaBox.text("");
         const keys = Object.keys(metaSelect[0]);
         keys.forEach((key,index) => {
-            metaBox.append('p').text(`${key}: ${metaSelect[0][key]}`);
+            metaBox.append("p").text(`${key}: ${metaSelect[0][key]}`);
         });
 
             // GAUGE CHART //
@@ -266,11 +274,10 @@ d3.json("../../data/samples.json").then(function(samples){
 
         var layoutGauge = {
             width: 600, 
-            height: 450, 
-            margin: { t: 0, b: 0 } 
+            height: 450
         };
 
-        Plotly.newPlot('gauge', dataGauge, layoutGauge);
+        Plotly.newPlot("gauge", dataGauge, layoutGauge);
     
 
     });
